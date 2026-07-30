@@ -1,0 +1,121 @@
+{
+  "chat_title": "AI Bot Support",
+  "chat_subtitle": "You are talking to a specialized AI Bot Support.",
+  "categories": [
+    {
+      "title": "Products",
+      "questions": [
+        {
+          "q": "How do I create a product?",
+          "a": "Open Products from the sidebar, click 'New product', enter name, code, unit, reference price, category and save."
+        },
+        {
+          "q": "What are product categories for?",
+          "a": "Categories organize products and limit which items appear while building a quote."
+        },
+        {
+          "q": "Can I use products without a category?",
+          "a": "No. Every product used in a quote must belong to a category."
+        }
+      ]
+    },
+    {
+      "title": "Quotes",
+      "questions": [
+        {
+          "q": "How do I create a quote?",
+          "a": "Open Quotes, click 'New quote' and add products with quantities and prices. Use the category filter if you want to narrow the product list."
+        },
+        {
+          "q": "How do I send the quote to the client?",
+          "a": "After saving, click 'Share' to copy the form link or the ready message. Delivery is manual through the channel you prefer."
+        },
+        {
+          "q": "Does Cotarpreco send messages automatically?",
+          "a": "No. The platform generates the quote, link and ready message; the user shares it manually."
+        }
+      ]
+    },
+    {
+      "title": "Categories",
+      "questions": [
+        {
+          "q": "What are categories for?",
+          "a": "Categories group products and help build quotes with coherent items."
+        },
+        {
+          "q": "How do I create a category?",
+          "a": "Open Categories from the sidebar, click 'New category', enter the name and save."
+        },
+        {
+          "q": "Can I search categories?",
+          "a": "Yes. Use the search field on the Categories screen to search by name or description."
+        }
+      ]
+    },
+    {
+      "title": "Subscription",
+      "questions": [
+        {
+          "q": "Where can I see my plan?",
+          "a": "Open Subscription from the sidebar to see plan, status, current cycle, and supplier responses received."
+        },
+        {
+          "q": "Which plan do I get when creating an account?",
+          "a": "Every account starts on the Free plan, with 15 supplier responses per month, basic platform access, and no included support."
+        },
+        {
+          "q": "Can I change plans?",
+          "a": "Plan switching is handled on the subscription page, with card payments."
+        }
+      ]
+    },
+    {
+      "title": "Technical Issues",
+      "questions": [
+        {
+          "q": "The page did not refresh after saving",
+          "a": "Refresh the page or try opening the module again from the sidebar."
+        },
+        {
+          "q": "The chat does not load",
+          "a": "Refresh the page (F5) or clear the browser cache. It works best in Chrome/Firefox."
+        },
+        {
+          "q": "My verification email did not arrive",
+          "a": "Check spam/junk. Request a new send from Settings > Resend Email."
+        }
+      ]
+    }
+  ],
+  "search_placeholder": "Search support",
+  "all_categories": "All categories",
+  "questions_title": "Frequently asked questions",
+  "start_hint": "Choose a category and open a FAQ question. If needed, continue with the specialized AI Bot Support.",
+  "no_results": "No questions found for this search.",
+  "reset_chat": "Clear conversation",
+  "email_label": "Email support:",
+  "fallback_message": "Describe your question to the AI Bot Support:",
+  "send_button": "Send",
+  "loading_message": "Thinking...",
+  "ai_error_message": "I could not answer right now. Please try again shortly.",
+  "not_found": "I couldn't find a ready answer for that. If needed, write to us by email:",
+  "need_attendant": "I need to talk to an attendant",
+  "ai_chat_button": "Talk to AI Bot Support",
+  "ai_input_locked_hint": "Check the FAQ first. If no answer solves your case, continue with AI Bot Support.",
+  "ai_unlocked_message": "You are talking to specialized AI Bot Support. Describe what happened.",
+  "satisfaction_button": "Satisfactory support",
+  "escalate_button": "Open support ticket",
+  "escalation_creating": "Creating request...",
+  "escalation_created": "Support request created.",
+  "escalation_error": "Could not create the request now.",
+  "satisfaction_thanks": "Thanks for the feedback.",
+  "input_locked_hint": "Check the FAQ first. If no answer solves your case, you can unlock support.",
+  "attendant_unlocked_message": "Okay. The field has been unlocked. Describe what happened so support can continue.",
+  "attendant_escalation_notice": "Message registered for support. While automatic integration is not active, our team follows up through the support channel.",
+  "chat_subscription_required_kicker": "Pro support",
+  "chat_subscription_required_title": "Chat is available to subscribers",
+  "chat_subscription_required_text": "Subscribe to the Pro plan to use AI Bot Support and open support tickets inside Cotarpreco.",
+  "chat_subscription_required_action": "View subscription",
+  "contact_email": "support@cotarpreco.com"
+}

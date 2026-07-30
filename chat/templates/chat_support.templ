@@ -1,0 +1,200 @@
+package components
+
+import "github.com/arthurcommodore/cotarpreco/internal/logic"
+import "encoding/json"
+
+type ChatPageProps struct {
+	FAQ     *logic.FAQ
+	T       func(string, ...string) string
+	FAQJSON string
+}
+
+func ChatSupport(t func(string, ...string) string, lang string) templ.Component {
+	faq, err := logic.GetFAQ(lang)
+	if err != nil {
+		faq = &logic.FAQ{}
+	}
+
+	b, err := json.Marshal(faq)
+	if err != nil {
+		b = []byte("{}")
+	}
+
+	return ChatPage(ChatPageProps{
+		FAQ:     faq,
+		T:       t,
+		FAQJSON: string(b),
+	})
+}
+
+templ ChatSubscriptionRequired(t func(string, ...string) string, lang string) {
+	<div class="chat-access-required">
+		<div class="chat-access-panel">
+			<span class="entity-title-icon" aria-hidden="true">
+				<img src="/static/img/chat.svg" alt=""/>
+			</span>
+			<p class="chat-kicker">{ t("chat_subscription_required_kicker") }</p>
+			<h1>{ t("chat_subscription_required_title") }</h1>
+			<p>{ t("chat_subscription_required_text") }</p>
+			<a
+				href={ "/" + lang + "/app/subscription" }
+				class="entity-primary-action"
+				@click.prevent="if (typeof loadPage === 'function') { loadPage('/subscription') } else { window.location.href = $el.href }"
+			>
+				<span>{ t("chat_subscription_required_action") }</span>
+			</a>
+		</div>
+	</div>
+}
+
+templ ChatPage(props ChatPageProps) {
+	<div
+		class="chat-container"
+		data-faq={ props.FAQJSON }
+		x-data="chat(JSON.parse($el.dataset.faq))"
+	>
+		<div class="chat-header">
+			<div class="entity-title-group">
+				<span class="entity-title-icon" aria-hidden="true">
+					<img src="/static/img/chat.svg" alt=""/>
+				</span>
+				<div>
+					<p class="chat-kicker">{ props.FAQ.Questions }</p>
+					<h1>{ props.FAQ.Title }</h1>
+					<p>{ props.FAQ.Subtitle }</p>
+				</div>
+			</div>
+			<button type="button" class="chat-reset" @click.stop.prevent="resetChat" x-show="messages.length > 0">
+				{ props.FAQ.Reset }
+			</button>
+		</div>
+		<div class="chat-body">
+			<div class="chat-sidebar">
+				<label class="chat-search">
+					<input type="search" x-model="query" placeholder={ props.FAQ.Search }/>
+				</label>
+				<div class="category-list">
+					<button
+						type="button"
+						class="category"
+						:class="{ 'active': selectedCategory === null }"
+						@click="selectCategory(null)"
+					>
+						<span>{ props.FAQ.All }</span>
+						<strong x-text="allQuestions().length"></strong>
+					</button>
+					<template x-for="cat in faq.categories" :key="cat.title">
+						<button
+							type="button"
+							class="category"
+							:class="{ 'active': selectedCategory === cat }"
+							@click="selectCategory(cat)"
+						>
+							<span x-text="cat.title"></span>
+							<strong x-text="cat.questions.length"></strong>
+						</button>
+					</template>
+				</div>
+			</div>
+			<div class="chat-main">
+				<div class="questions-panel">
+					<div class="questions-header">
+						<div>
+							<span>{ props.FAQ.Questions }</span>
+							<h2 x-text="currentTitle()"></h2>
+						</div>
+						<strong x-text="filteredQuestions().length"></strong>
+					</div>
+					<template x-if="filteredQuestions().length === 0">
+						<div class="chat-empty">
+							<p>{ props.FAQ.NoResults }</p>
+							<button type="button" @click.stop.prevent="unlockAIChat" x-text="aiChatButton()">
+								{ props.FAQ.AIChatButton }
+							</button>
+						</div>
+					</template>
+					<template x-for="q in filteredQuestions()" :key="q.category + q.q">
+						<div class="question-item" @click="addMessage(q.q, q.a)">
+							<span x-text="q.category"></span>
+							<p x-text="q.q"></p>
+						</div>
+					</template>
+					<div class="chat-funnel-action" x-show="filteredQuestions().length > 0 && shouldShowAttendantOption() && !inputUnlocked" x-cloak>
+						<p x-text="aiInputLockedHint()">{ props.FAQ.AIInputLockedHint }</p>
+						<button type="button" @click.stop.prevent="unlockAIChat" x-text="aiChatButton()">
+							{ props.FAQ.AIChatButton }
+						</button>
+					</div>
+				</div>
+				<div class="chat-conversation">
+					<div class="messages-area">
+						<template x-if="messages.length === 0">
+							<div class="chat-start">
+								<p>{ props.FAQ.StartHint }</p>
+							</div>
+						</template>
+						<template x-for="msg in messages" :key="msg.id">
+							<div class="message-row" :class="msg.type === 'user' ? 'message-row-user' : 'message-row-bot'">
+								<div :class="msg.type === 'user' ? 'message user-message' : 'message bot-message'">
+									<p x-html="formatMessage(msg.text)"></p>
+								</div>
+								<div class="chat-satisfaction-actions" x-show="shouldShowSatisfactionActions(msg)" x-cloak>
+									<button
+										type="button"
+										class="chat-satisfaction-button"
+										:disabled="isCreatingHumanSupport(msg)"
+										@click.stop.prevent="markSatisfactory(msg)"
+										x-text="satisfactionLabel()"
+									></button>
+									<button
+										type="button"
+										class="chat-escalation-button"
+										x-show="shouldShowEscalationAction(msg)"
+										:disabled="isCreatingHumanSupport(msg)"
+										@click.stop.prevent="requestHumanSupport(msg)"
+										x-text="isCreatingHumanSupport(msg) ? escalationCreatingLabel() : escalationLabel()"
+									></button>
+								</div>
+								<p
+									class="chat-feedback-status"
+									:class="{ 'chat-feedback-error': msg.humanSupportError }"
+									x-show="messageFeedbackText(msg)"
+									x-text="messageFeedbackText(msg)"
+									x-cloak
+								></p>
+							</div>
+						</template>
+						<div class="chat-funnel-action chat-funnel-action-inline" x-show="messages.length > 0 && !inputUnlocked" x-cloak>
+							<p x-text="aiInputLockedHint()">{ props.FAQ.AIInputLockedHint }</p>
+							<button type="button" @click.stop.prevent="unlockAIChat" x-text="aiChatButton()">
+								{ props.FAQ.AIChatButton }
+							</button>
+						</div>
+					</div>
+					<template x-if="inputUnlocked">
+						<div class="chat-input">
+							<input
+								x-model="userInput"
+								:placeholder="inputPlaceholder()"
+								@keyup.enter="sendMessage()"
+							/>
+							<button type="button" @click.stop.prevent="sendMessage">{ props.FAQ.SendBtn }</button>
+						</div>
+					</template>
+					<template x-if="!inputUnlocked">
+						<div class="chat-input-locked">
+							<p x-text="aiInputLockedHint()">{ props.FAQ.AIInputLockedHint }</p>
+							<button type="button" x-show="shouldShowAttendantOption()" @click.stop.prevent="unlockAIChat" x-text="aiChatButton()">
+								{ props.FAQ.AIChatButton }
+							</button>
+						</div>
+					</template>
+					<div class="chat-footer">
+						<span>{ props.FAQ.EmailLabel }</span>
+						<a :href="'mailto:' + email()" x-text="email()"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}

@@ -1,0 +1,121 @@
+{
+  "chat_title": "Soporte IA Bot",
+  "chat_subtitle": "Estás hablando con un Soporte IA Bot especializado.",
+  "categories": [
+    {
+      "title": "Productos",
+      "questions": [
+        {
+          "q": "¿Cómo registro un producto?",
+          "a": "Accede a Productos en el menú lateral y haz clic en 'Nuevo producto'. Informa nombre, código, unidad, precio de referencia, categoría y guarda."
+        },
+        {
+          "q": "¿Para qué sirven las categorías en productos?",
+          "a": "Las categorías organizan productos y limitan qué ítems aparecen al crear una cotización."
+        },
+        {
+          "q": "¿Puedo usar productos sin categoría?",
+          "a": "No. Todo producto usado en una cotización debe pertenecer a una categoría."
+        }
+      ]
+    },
+    {
+      "title": "Cotizaciones",
+      "questions": [
+        {
+          "q": "¿Cómo creo una cotización?",
+          "a": "Accede a Cotizaciones, haz clic en 'Nueva cotización' y agrega productos con cantidades y precios. Usa el filtro de categoría si quieres limitar la lista de productos."
+        },
+        {
+          "q": "¿Cómo envío la cotización al cliente?",
+          "a": "Después de guardar, haz clic en 'Compartir' para copiar el enlace del formulario o el mensaje listo. El envío es manual por el canal que prefieras."
+        },
+        {
+          "q": "¿Cotarpreco envía mensajes automáticamente?",
+          "a": "No. La plataforma genera la cotización, el enlace y el mensaje listo; el usuario lo comparte manualmente."
+        }
+      ]
+    },
+    {
+      "title": "Categorías",
+      "questions": [
+        {
+          "q": "¿Para qué sirven las categorías?",
+          "a": "Las categorías agrupan productos y ayudan a crear cotizaciones con ítems coherentes."
+        },
+        {
+          "q": "¿Cómo crear una categoría?",
+          "a": "Accede a Categorías en el menú lateral, haz clic en 'Nueva categoría', informa el nombre y guarda."
+        },
+        {
+          "q": "¿Puedo buscar categorías?",
+          "a": "Sí. Usa el campo de búsqueda de Categorías para buscar por nombre o descripción."
+        }
+      ]
+    },
+    {
+      "title": "Suscripción",
+      "questions": [
+        {
+          "q": "¿Dónde veo mi plan?",
+          "a": "Accede a Suscripción en el menú lateral para ver plan, estado, ciclo actual y consumo mensual de cotizaciones."
+        },
+        {
+          "q": "¿Qué plan recibo al crear la cuenta?",
+          "a": "Toda cuenta comienza en el plan Free, con 15 presupuestos recibidos por mes, acceso básico a la plataforma y sin soporte incluido."
+        },
+        {
+          "q": "¿Puedo cambiar de plan?",
+          "a": "El cambio de planes se realiza desde la página de suscripción, con pago con tarjeta."
+        }
+      ]
+    },
+    {
+      "title": "Problemas técnicos",
+      "questions": [
+        {
+          "q": "La página no se actualizó después de guardar",
+          "a": "Actualiza la página o intenta abrir el módulo nuevamente desde el menú lateral."
+        },
+        {
+          "q": "El chat no carga",
+          "a": "Actualiza la página (F5) o limpia la caché del navegador. Funciona mejor en Chrome/Firefox."
+        },
+        {
+          "q": "Mi correo de verificación no llegó",
+          "a": "Revisa spam/correo no deseado. Solicita un nuevo envío en Configuración > Reenviar correo."
+        }
+      ]
+    }
+  ],
+  "search_placeholder": "Buscar en soporte",
+  "all_categories": "Todas las categorías",
+  "questions_title": "Preguntas frecuentes",
+  "start_hint": "Elige una categoría y abre una pregunta del FAQ. Si lo necesitas, continúa con el Soporte IA Bot especializado.",
+  "no_results": "No se encontraron preguntas para esa búsqueda.",
+  "reset_chat": "Limpiar conversación",
+  "email_label": "Soporte por correo:",
+  "fallback_message": "Describe tu duda para el Soporte IA Bot:",
+  "send_button": "Enviar",
+  "loading_message": "Pensando...",
+  "ai_error_message": "No pude responder ahora. Inténtalo de nuevo en unos instantes.",
+  "not_found": "No encontré una respuesta lista para eso. Si lo necesitas, escribe al correo:",
+  "need_attendant": "Necesito hablar con un atendente",
+  "ai_chat_button": "Hablar con el Soporte IA Bot",
+  "ai_input_locked_hint": "Consulta primero el FAQ. Si ninguna respuesta resuelve tu caso, continúa con el Soporte IA Bot.",
+  "ai_unlocked_message": "Estás hablando con el Soporte IA Bot especializado. Describe lo que ocurrió.",
+  "satisfaction_button": "Atención satisfactoria",
+  "escalate_button": "Abrir ticket de soporte",
+  "escalation_creating": "Creando solicitud...",
+  "escalation_created": "Solicitud de soporte creada.",
+  "escalation_error": "No fue posible crear la solicitud ahora.",
+  "satisfaction_thanks": "Gracias por el retorno.",
+  "input_locked_hint": "Consulta primero el FAQ. Si ninguna respuesta resuelve tu caso, puedes liberar la atención.",
+  "attendant_unlocked_message": "Listo. El campo fue liberado. Describe lo que ocurrió para continuar la atención.",
+  "attendant_escalation_notice": "Mensaje registrado para soporte. Mientras la integración automática no está activa, nuestro equipo acompaña por el canal de soporte.",
+  "chat_subscription_required_kicker": "Soporte Pro",
+  "chat_subscription_required_title": "Chat disponible para suscriptores",
+  "chat_subscription_required_text": "Suscríbete al plan Pro para usar el Soporte IA Bot y abrir tickets de soporte dentro de Cotarpreco.",
+  "chat_subscription_required_action": "Ver suscripción",
+  "contact_email": "soporte@cotarpreco.com"
+}
